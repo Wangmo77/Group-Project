@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Staff Dashboard - B-Link Samtse</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">B-Link</div>
+                <div class="sidebar-title">Hospital Staff</div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" id="dashboardLink"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#" id="bloodRequestsLink"><i class="fas fa-tint"></i> Blood Requests</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content - Main Dashboard -->
+        <div class="main-content" id="mainDashboard">
+            <div class="header">
+                <h1>Hospital Staff Dashboard</h1>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">HS</div>
+                    <div class="user-details">
+                        <span id="userName">Hospital Staff</span>
+                        <span id="hospitalCode" class="hospital-code">Code: -</span>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <h3>Pending Appointments</h3>
+                    <div class="number" id="pendingCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Confirmed Today</h3>
+                    <div class="number" id="confirmedCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Blood Requests</h3>
+                    <div class="number" id="bloodRequestsCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Donors</h3>
+                    <div class="number" id="activeDonors">0</div>
+                </div>
+            </div>
+            
+            <!-- Pending Appointments Section -->
+            <div class="appointments-section">
+                <div class="section-header">
+                    <h2>Pending Appointments</h2>
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="today">Today</button>
+                        <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table id="appointmentsTable">
+                        <thead>
+                            <tr>
+                                <th>Donor Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Blood Type</th>
+                                <th>Appointment Date</th>
+                                <th>Appointment Time</th>
+                                <th>Blood Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointmentsBody">
+                            <!-- Appointments will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                    <div class="no-appointments" id="noAppointments" style="display: none;">
+                        <i class="fas fa-calendar-times" style="font-size: 3rem; margin-bottom: 1rem; color: #ccc;"></i>
+                        <h3>No Pending Appointments</h3>
+                        <p>All appointments have been processed.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Confirmed Donations Section -->
+            <div class="confirmed-section">
+                <div class="section-header">
+                    <h2>Confirmed Donations</h2>
+                    <button class="action-btn danger" id="clearDonationHistory">Clear History</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="confirmedTable">
+                        <thead>
+                            <tr>
+                                <th>Donor Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Blood Type</th>
+                                <th>Donation Date</th>
+                                <th>Donation Time</th>
+                                <th>Blood Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="confirmedBody">
+                            <!-- Confirmed donations will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                    <div class="no-appointments" id="noConfirmed" style="display: none;">
+                        <i class="fas fa-tint" style="font-size: 3rem; margin-bottom: 1rem; color: #ccc;"></i>
+                        <h3>No Confirmed Donations</h3>
+                        <p>Confirmed donations will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Blood Requests Dashboard -->
+        <div class="main-content blood-requests-dashboard" id="bloodRequestsDashboard">
+            <div class="header">
+                <h1>Blood Request Management</h1>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar2">HS</div>
+                    <div class="user-details">
+                        <span id="userName2">Hospital Staff</span>
+                        <span id="hospitalCode2" class="hospital-code">Code: -</span>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn2">Logout</button>
+                </div>
+            </div>
+            
+            <!-- Blood Request Stats Cards -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <h3>Pending Requests</h3>
+                    <div class="number" id="pendingRequestsCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Urgent Requests</h3>
+                    <div class="number" id="urgentRequestsCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Scheduled</h3>
+                    <div class="number" id="scheduledRequestsCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Fulfilled</h3>
+                    <div class="number" id="fulfilledRequestsCount">0</div>
+                </div>
+            </div>
+            
+            <!-- Blood Requests Section -->
+            <div class="blood-requests-section">
+                <div class="section-header">
+                    <h2>Blood Requests</h2>
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-filter-request="all">All</button>
+                        <button class="filter-btn" data-filter-request="pending">Pending</button>
+                        <button class="filter-btn" data-filter-request="urgent">Urgent</button>
+                        <button class="filter-btn" data-filter-request="scheduled">Scheduled</button>
+                        <button class="filter-btn" data-filter-request="fulfilled">Fulfilled</button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table id="bloodRequestsTable">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Contact</th>
+                                <th>Blood Type</th>
+                                <th>Blood Needed</th>
+                                <th>Hospital</th>
+                                <th>Urgency</th>
+                                <th>Status</th>
+                                <th>Required Date</th>
+                                <th>Request Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bloodRequestsBody">
+                            <!-- Blood requests will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                    <div class="no-appointments" id="noBloodRequests" style="display: none;">
+                        <i class="fas fa-tint" style="font-size: 3rem; margin-bottom: 1rem; color: #ccc;"></i>
+                        <h3>No Blood Requests</h3>
+                        <p>Blood requests from patients will appear here.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Donor Matching Section -->
+            <div class="donor-match-section" id="donorMatchSection" style="display: none;">
+                <h3>Matching Donors</h3>
+                <p>These donors match the blood type required for this request:</p>
+                <div class="donor-list" id="matchingDonorsList">
+                    <!-- Matching donors will be loaded here dynamically -->
+                </div>
+            </div>
+            
+            <!-- Blood Request History Section -->
+            <div class="confirmed-section">
+                <div class="section-header">
+                    <h2>Blood Request History</h2>
+                    <button class="action-btn danger" id="clearRequestHistory">Clear History</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="requestHistoryTable">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Contact</th>
+                                <th>Blood Type</th>
+                                <th>Blood Needed</th>
+                                <th>Hospital</th>
+                                <th>Status</th>
+                                <th>Request Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requestHistoryBody">
+                            <!-- Blood request history will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                    <div class="no-appointments" id="noRequestHistory" style="display: none;">
+                        <i class="fas fa-history" style="font-size: 3rem; margin-bottom: 1rem; color: #ccc;"></i>
+                        <h3>No Blood Request History</h3>
+                        <p>Completed blood requests will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Donor Modal -->
+    <div class="modal" id="scheduleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Schedule Donor for Blood Request</h2>
+                <button class="close-btn" id="closeScheduleModal">&times;</button>
+            </div>
+            <form id="scheduleForm">
+                <input type="hidden" id="requestId">
+                <div class="form-group">
+                    <label for="donorName">Donor Name</label>
+                    <input type="text" id="donorName" required>
+                </div>
+                <div class="form-group">
+                    <label for="donorContact">Donor Email or Phone</label>
+                    <input type="text" id="donorContact" required placeholder="Enter donor's email or phone number">
+                    <small style="color: #666; font-size: 0.8rem;">This will be used to identify the donor and send them a notification</small>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentDate">Appointment Date</label>
+                    <input type="date" id="appointmentDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentTime">Appointment Time</label>
+                    <input type="time" id="appointmentTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message to Donor</label>
+                    <textarea id="message" placeholder="Add any additional instructions or information for the donor..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="action-btn secondary" id="cancelSchedule">Cancel</button>
+                    <button type="submit" class="action-btn">Schedule Donor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Request Details Modal -->
+    <div class="modal" id="requestDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Blood Request Details</h2>
+                <button class="close-btn" id="closeDetailsModal">&times;</button>
+            </div>
+            <div id="requestDetailsContent">
+                <!-- Request details will be loaded here dynamically -->
+            </div>
+            <div class="form-actions">
+                <button type="button" class="action-btn secondary" id="closeDetailsBtn">Close</button>
+                <button type="button" class="action-btn" id="scheduleFromDetailsBtn">Schedule Donor</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal delete-confirm-modal" id="deleteConfirmModal">
+        <div class="modal-content">
+            <div class="delete-confirm-content">
+                <div class="warning-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2>Confirm Deletion</h2>
+                <p id="deleteConfirmMessage">Are you sure you want to delete this record? This action cannot be undone.</p>
+                <div class="form-actions">
+                    <button type="button" class="action-btn secondary" id="cancelDelete">Cancel</button>
+                    <button type="button" class="action-btn danger" id="confirmDelete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-Link Samtse - Donor Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/t.jpg" alt="B-Link Samtse Logo" class="logo-img">
+            <div class="logo-text">B-Link Samtse</div>
+        </div>
+        
+        <!-- User Profile Dropdown -->
+        <div class="user-profile" id="userProfile">
+            <div class="profile-pic" id="userAvatar">US</div>
+            <div class="user-info">
+                <div class="user-name" id="userDisplayName">Loading...</div>
+                <div class="user-email" id="userEmail">Loading...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            
+            <div class="dropdown-menu">
+                <button class="dropdown-item logout" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="dashboard-section">
+        <div class="dashboard-header">
+            <div class="welcome-message">
+                <h1 id="welcomeTitle">Welcome,</h1>
+                <p id="welcomeSubtitle">Thank you for being a life-saving blood donor</p>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Personal Information Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-user"></i>
+                    <h2>Personal Information</h2>
+                </div>
+                <form id="personalInfoForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" rows="2" placeholder="Enter your address"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bloodType">Blood Type</label>
+                        <select id="bloodType" name="bloodType" required>
+                            <option value="">Select Blood Type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn">Save Information</button>
+                </form>
+                <div class="success-message" id="personalInfoSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Personal information saved successfully!</span>
+                </div>
+            </div>
+
+            <!-- Schedule Donation Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-calendar-plus"></i>
+                    <h2>Schedule Next Donation</h2>
+                </div>
+                <form id="scheduleForm">
+                    <div class="form-group">
+                        <label for="donationDate">Preferred Date</label>
+                        <input type="date" id="donationDate" name="donationDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="donationTime">Preferred Time</label>
+                        <select id="donationTime" name="donationTime" required>
+                            <option value="">Select Time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bloodAmount">Blood Amount to Donate</label>
+                        <select id="bloodAmount" name="bloodAmount" required>
+                            <option value="">Select Amount</option>
+                            <option value="0.35">350 ml</option>
+                            <option value="0.45">450 ml (Standard)</option>
+                            <option value="0.5">500 ml</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn">Schedule Donation</button>
+                </form>
+                <div class="success-message" id="scheduleSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Donation scheduled successfully! Waiting for hospital confirmation.</span>
+                </div>
+            </div>
+
+            <!-- Notifications Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-bell"></i>
+                    <h2>Notifications</h2>
+                    <div class="notification-badge" id="notificationBadge" style="display: none;">0</div>
+                </div>
+                <div id="notificationsContainer">
+                    <div class="no-history" id="noNotificationsMessage">
+                        You don't have any notifications.
+                    </div>
+                    <!-- Notifications will be added here dynamically -->
+                </div>
+            </div>
+
+            <!-- Appointment Status Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-clock"></i>
+                    <h2>Appointment Status</h2>
+                </div>
+                <div id="appointmentStatusContainer">
+                    <div class="no-history" id="noAppointmentMessage">
+                        You don't have any scheduled appointments.
+                    </div>
+                    <!-- Appointment status will be added here dynamically -->
+                </div>
+            </div>
+
+            <!-- Donation History Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-history"></i>
+                    <h2>Donation History</h2>
+                </div>
+                <div class="donation-history" id="donationHistoryContainer">
+                    <div class="no-history" id="noHistoryMessage">
+                        You haven't made any confirmed donations yet.
+                    </div>
+                    <!-- History items will be added here dynamically -->
+                </div>
+            </div>
+
+            <!-- Account Management Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-cog"></i>
+                    <h2>Account Management</h2>
+                </div>
+                <div class="form-group">
+                    <label for="accountStatus">Account Status</label>
+                    <input type="text" id="accountStatus" value="Active" readonly style="background-color: #f0f0f0;">
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-outline" id="changePasswordBtn">Change Password</button>
+                    <button class="btn btn-outline" id="deactivateBtn">Deactivate Account</button>
+                    <button class="btn btn-danger" id="deleteAccountBtn">Delete Account</button>
+                </div>
+                
+                <div class="success-message" id="accountSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="accountMessage"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Change Password</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="changePasswordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" name="currentPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                </div>
+                
+                <button type="submit" class="btn">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Deactivate Account Modal -->
+    <div class="modal" id="deactivateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Deactivate Account</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <p>Are you sure you want to deactivate your account? You can reactivate it anytime by logging in again.</p>
+            <div class="action-buttons" style="margin-top: 1.5rem;">
+                <button class="btn btn-outline" id="cancelDeactivate">Cancel</button>
+                <button class="btn" id="confirmDeactivate">Deactivate Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Delete Account</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <p style="color: #dc3545; font-weight: bold;">Warning: This action cannot be undone. All your data will be permanently deleted.</p>
+            <p>Are you sure you want to delete your account?</p>
+            <div class="action-buttons" style="margin-top: 1.5rem;">
+                <button class="btn btn-outline" id="cancelDelete">Cancel</button>
+                <button class="btn btn-danger" id="confirmDelete">Delete Account Permanently</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="images/t.jpg" alt="B-Link Samtse Logo" class="footer-logo-img">
+                    <div class="footer-logo-text">B-Link Samtse</div>
+                </div>
+                <p class="footer-description">
+                    Saving lives through voluntary blood donation. Join our community of heroes and make a difference in someone's life today.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="eligibility.html"><i class="fas fa-chevron-right"></i> Donor Eligibility</a></li>
+                    <li><a href="btypes.html"><i class="fas fa-chevron-right"></i> Blood Types</a></li>
+                    <li><a href="success-stories.html"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-heading">Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="success-stories.html"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                    <li><a href="request.html"><i class="fas fa-chevron-right"></i> Request Blood</a></li>
+                    <li><a href="#" target="_blank"><i class="fas fa-chevron-right"></i> Blood Donation Guidelines</a></li>
+                    <li><a href="#" target="_blank"><i class="fas fa-chevron-right"></i> Educational Video</a></li>
+                    <li><a href="#" target="_blank"><i class="fas fa-chevron-right"></i> Health & Safety Info</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-heading">Contact Info</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Samtse, Bhutan</span></li>
+                    <li><i class="fas fa-phone"></i><span>+975-XX-XXXXXX</span></li>
+                    <li><i class="fas fa-envelope"></i><span>info@blinksamtse.org</span></li>
+                    <li><i class="fas fa-clock"></i><span>Mon - Sat: 9:00 AM - 4:00 PM</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 B-Link Samtse. All rights reserved.</p>
+            <p>Contact: info@blinksamtse.org | Phone: +975-XX-XXXXXX</p>
+            <p>Designed with <i class="fas fa-heart" style="color: #c8102e;"></i> to save lives</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    
+</body>
+</html>

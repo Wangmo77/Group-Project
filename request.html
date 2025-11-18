@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Blood - B-Link Samtse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header (Same as Homepage) -->
+    <header>
+        <div class="logo-container">
+            <img src="images/t.jpg" alt="B-Link Samtse Logo" class="logo-img">
+            <div class="logo-text">B-Link Samtse</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About us</a></li>
+                <li><a href="awareness.html">Awareness</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="user-info" id="userInfo">
+            <div class="user-avatar" id="userAvatar">JD</div>
+            <span id="userName">John Doe</span>
+            <button class="dashboard-btn" id="dashboardBtn">Dashboard</button>
+        </div>
+    </header>
+
+    <!-- Request Blood Content -->
+    <section class="request-hero">
+        <h1>Request Blood</h1>
+        <p>Fill out the form below to request blood. Our hospital staff will contact you as soon as possible.</p>
+    </section>
+
+    <section class="request-container">
+        <div class="request-form">
+            <form id="bloodRequestForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientName">Patient Name *</label>
+                        <input type="text" id="patientName" name="patientName" required placeholder="Enter patient's full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter phone number">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter email address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bloodType">Required Blood Type *</label>
+                        <select id="bloodType" name="bloodType" required>
+                            <option value="">Select Blood Type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="unknown">Don't Know</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="units">Amount Required (ml) *</label>
+                        <select id="units" name="units" required>
+                            <option value="">Select Amount</option>
+                            <option value="350">350 ml</option>
+                            <option value="450">450 ml</option>
+                            <option value="500">500 ml</option>
+                            <option value="700">700 ml</option>
+                            <option value="900">900 ml</option>
+                            <option value="1000">1000 ml</option>
+                            <option value="custom">Custom Amount</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="customAmountContainer" style="display: none;">
+                        <label for="customAmount">Custom Amount (ml)</label>
+                        <input type="number" id="customAmount" name="customAmount" min="100" max="5000" placeholder="Enter amount in ml">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="hospital">Hospital Name *</label>
+                    <input type="text" id="hospital" name="hospital" required placeholder="Enter hospital name">
+                </div>
+
+                <div class="form-group">
+                    <label>Urgency Level *</label>
+                    <div class="urgency-level">
+                        <div class="urgency-btn urgency-high" data-level="high">
+                            <i class="fas fa-exclamation-triangle"></i><br>
+                            High<br>
+                            <small>Emergency</small>
+                        </div>
+                        <div class="urgency-btn urgency-medium" data-level="medium">
+                            <i class="fas fa-exclamation-circle"></i><br>
+                            Medium<br>
+                            <small>Within 24 hours</small>
+                        </div>
+                        <div class="urgency-btn urgency-low" data-level="low">
+                            <i class="fas fa-info-circle"></i><br>
+                            Low<br>
+                            <small>Scheduled surgery</small>
+                        </div>
+                    </div>
+                    <input type="hidden" id="urgency" name="urgency" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="requiredDate">Required Date *</label>
+                    <input type="date" id="requiredDate" name="requiredDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalInfo">Additional Information</label>
+                    <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Any additional details about the patient's condition or special requirements..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Blood Request
+                </button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <span>Your blood request has been submitted successfully! Hospital staff will contact you soon.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Same as Homepage) -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="images/t.jpg" alt="B-Link Samtse Logo" class="footer-logo-img">
+                    <div class="footer-logo-text">B-Link Samtse</div>
+                </div>
+                <p class="footer-description">
+                    Saving lives through voluntary blood donation. Join our community of heroes and make a difference in someone's life today.
+                </p>
+                <div class="social-links">
+                    <a href="https://share.google/XkWl638X7sPEdINGM" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://share.google/C0ogXNsZNHdPaPQbt" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://share.google/hZKMKsraaNqESvwmN" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://share.google/E2cOvc53EgQTay8mY" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="eligibility.html"><i class="fas fa-chevron-right"></i> Donor Eligibility</a></li>
+                    <li><a href="btypes.html"><i class="fas fa-chevron-right"></i> Blood Types</a></li>
+                    <li><a href="success-stories.html"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-heading">Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="success-stories.html"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                    <li><a href="request.html"><i class="fas fa-chevron-right"></i> Request Blood</a></li>
+                    <li><a href="https://share.google/q9gcfHFFn7hBuBo48" target="_blank"><i class="fas fa-chevron-right"></i> Blood Donation Guidelines</a></li>
+                    <li><a href="https://youtu.be/FXmkVg8a2Mo?si=aYDvx06rSHSM7jWk" target="_blank"><i class="fas fa-chevron-right"></i> Educational Video</a></li>
+                    <li><a href="https://share.google/1bV3zoJfUjJyYHVvh" target="_blank"><i class="fas fa-chevron-right"></i> Health & Safety Info</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-heading">Contact Info</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Samtse, Bhutan</span></li>
+                    <li><i class="fas fa-phone"></i><span>+975-XX-XXXXXX</span></li>
+                    <li><i class="fas fa-envelope"></i><span>info@blinksamtse.org</span></li>
+                    <li><i class="fas fa-clock"></i><span>Mon - Sat: 9:00 AM - 4:00 PM</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 B-Link Samtse. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: #c8102e;"></i> to save lives</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
